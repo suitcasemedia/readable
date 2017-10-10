@@ -1,0 +1,263 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1.2em;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/* end of reset */
+p{}
+
+h2{font-size: 2em;
+  line-height: 1.3em;
+padding: 0.5em 0 ;
+}
+a > h2 ,a {
+  text-decoration: none;
+  color: #444;
+}
+a > h2:hover{
+  color: #fff;
+}
+h3{
+  font-size: 1.5em ;
+  padding: 0.5em 0 ;
+}
+h4{
+  font-size: 1.2em ;
+  padding: 0.5em 0 ;
+}
+ul{
+  margin: 0.5em 0;
+}
+.App {
+  text-align: center;
+  color: #444;
+  font-family: arial;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #64556c;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+select{
+ padding: 0.5em;
+ color: #444;
+ font-size: 1em;
+}
+.categories{
+  display: inline-block;
+
+}
+
+
+.categories__item{
+  font-size: 1.5em;
+  float: left;
+  color: #64556c;
+  list-style-type: none;
+  background: #ccc;
+  padding: 1em;
+  margin: 0.2em;
+}
+.categories__item:hover{
+  background-color: #64556c;
+  color: #fff;
+}
+
+
+
+
+.categories__item--active{
+
+  border: 1px solid #64556c;
+
+}
+
+
+.relative-container{
+  position: relative;
+}
+
+.width-50{
+
+  width: 50%;
+}
+.all-margin-1{
+  margin: 0.1em;
+}
+
+.posts-list {
+  text-align:  left;
+  list-style-type:none;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.posts-list__item{
+  border: 1px solid #64556c;
+  display: flex;
+  justify-content: space-between;
+}
+
+.posts-list__item:hover{
+  background:  #64556c;
+  
+  color: #fff;
+ 
+}
+.posts-list__item--comments:hover{
+  background: #fff;
+  color: #444;
+}
+
+.full-post ,
+.comments-list{
+
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  background: #f4f7ee;
+  margin-top: 1em;
+}
+
+
+.add-new a {
+  color: #fff;
+  text-decoration: none ;
+}
+
+.add-new--on-white a {
+  color: #444;
+  
+}
+
+
+.add-new a:hover , a.back:hover {
+  text-decoration: underline;
+  color: #fff;
+  
+}
+
+
+.post-list__item__primary {
+  flex-basis: 75%;
+  padding: 1em;
+}
+.post-list__item__secondary {
+  flex-basis: 25%;
+  padding: 1em;
+}
+
+
+
+.posts-list__item >  h2,
+ {
+  -padding: 0;
+}
+
+.no-margin {
+  margin: 0!important;
+}
+
+.right{
+  float: right;
+}
+
+button{
+  padding: 0.4em;
+  color: #fff;
+  background-color: #64556c;
+  font-size: 1.1em;
+  border: 1px solid #64556c;
+}
+button:hover ,  button:hover > a{
+  background-color: #fff;
+  color :#64556c;
+}
+.button--small{
+  font-size: 0.8em;
+}
+.fw{
+  width: 100%;
+}
+.w-95{
+  width: 95%;
+}
+.height-2em{
+  height: 2em;
+}
+.t-align-left{
+  text-align: left;
+}
+.white{
+  color: white;
+}
+a {
+  color: #fff;
+}
+a:hover{
+  color :#64556c;
+}
