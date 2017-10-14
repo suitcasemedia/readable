@@ -11,6 +11,7 @@ componentDidMount(){
     const {id} = this.props.match.params
     this.props.loadPost(id);
     const post = this.props.post;
+    console.log("props = ", this.props)
     
 }
 
@@ -19,13 +20,14 @@ componentDidMount(){
     const {meta : {touched , error}} = field;
     
     const className = `form-group ${touched && error ? 'has-danger': ''}` ;
+    
     return( 
        <div className="form-group has-danger">
             <label>{field.label}</label>
             <input
                 className={className}
                 type="text"    
-                onChange={this.props.changeField(this.id, field.name , this)}
+               
                 {...field.input}
                 value={field.initialValue ||''}
               

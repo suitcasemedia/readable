@@ -13,7 +13,12 @@ import Post from './components/post';
 import CreatePost from './components/create-post';
 import Edit from './components/edit'
 //const store = createStore(reducer)
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ 
+
+const createStoreWithMiddleware = composeEnhancers(applyMiddleware(promise))(createStore);
+
+
 ReactDOM.render(
     <Provider store={createStoreWithMiddleware(reducer)}>
       <BrowserRouter>
