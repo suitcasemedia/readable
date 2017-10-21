@@ -3,9 +3,9 @@ import {Field} from 'redux-form'
 import { reduxForm} from 'redux-form'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {createPost} from '../actions'
+import {createComment} from '../actions'
 
-class CreatePost extends Component {
+class CreateComment extends Component {
 
 
   renderField(field){
@@ -31,13 +31,11 @@ class CreatePost extends Component {
 
 onSubmit(values){
   
-   this.props.createPost(values,  () =>{
-       console.log("callback here")
-        this.props.history.push('/')
+   this.props.createComment(this.props.id, values,() =>{
+        this.props.history.push(`/post/${this.props.id}`)
    });
 }
 render(){
-  
           const {handleSubmit} = this.props;
   
           return(
@@ -45,26 +43,15 @@ render(){
             
               <div className="App">
                 <div className="App-header">
-                  <div className="t-align-left" ><Link className="white back" to="/">Back to post listing page</Link></div>
-                  <h2>  Create new post</h2>
+                  <div className="t-align-left" ><Link className="white back" to={`/post/${this.props.id}`}>Back to post</Link></div>
+                  <h2>  Create new Comment</h2>
                 </div>
                 <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                 
                   <Field
-                      label="Title"
-                      name="title"
-                      component={this.renderField}
-                  />
-                   <Field
-                       label="Categories"
-                      name="category"
-                      component={this.renderField}
-                  />
-                  <Field
-                      label="Post Content"
+                      label="Comment Content"
                       name="body"
-                      component={this.renderField}
-  
-                  />
+                      component={this.renderField}/>
                   <Field
                       label="Author"
                       name="author"
@@ -84,34 +71,32 @@ render(){
 function validate(values) {
   const errors = {}
 
-  //   valitate the inputs from 'values'
-  if(!values.title || values.title.length < 3){
-      errors.title = "Enter a title that is at least 3 characters long"
-
-  }
-  if(!values.category){
-      errors.categories = "Enter a Category"
-
-  }
+ 
   if(!values.body){
       errors.body = "Enter some content please"
 
   }
+
   if(!values.owner){
     errors.owner = "Enter some content please"
 
 }
 
-
 return errors;
   
 }
 
-
+function  mapStateToProps(state,ownProps){
+    const params = ownProps.match.params.id; 
+   
+    
+      return{ id: params}
+  
+  }
 export default reduxForm({
   validate,
-  form:'PostsNewForm'
+  form:'CommentsNewForm'
 })(
- connect(null,{createPost})(CreatePost)
+ connect(mapStateToProps,{createComment})(CreateComment)
 );
 

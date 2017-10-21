@@ -10,13 +10,16 @@ import reducer from './reducers' ;
 import registerServiceWorker from './registerServiceWorker';
 import Posts from './components/posts';
 import Post from './components/post';
+import CreateComment from './components/create-comment'
 import CreatePost from './components/create-post';
 import Edit from './components/edit'
 //const store = createStore(reducer)
 
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ 
 
 const createStoreWithMiddleware = composeEnhancers(applyMiddleware(promise))(createStore);
+
 
 
 ReactDOM.render(
@@ -27,7 +30,11 @@ ReactDOM.render(
           <Route exact path="/post/:id" component={Post} />
           <Route exact path="/edit/:id" component={Edit} />
           <Route exact path="/create-post" component={CreatePost} />
+          <Route exact path="/create-comment/:id" component={CreateComment} />
           <Route exact path="/" component={Posts} />
+
+
+
         
           
         </Switch>

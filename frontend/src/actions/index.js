@@ -11,6 +11,8 @@ export const CHANGE_FIELD = 'CHANGE_FIELD' ;
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const LOAD_POST_COMMENTS = 'LOAD_POST_COMMENTS';
 export const UP_VOTE_POST = 'UP_VOTE_POST' ;
+export const POPULATE_FORM = 'POPULATE_FORM' ;
+export const SET_FORM_STATE = 'SET_FORM_STATE'
 const ROOT_URL = 'http://localhost:5001'
 const API_KEY = '?authorization=hello'
 
@@ -49,6 +51,7 @@ export function loadPost(id){
 
 
 export function createPost(values ,callback){
+    console.log("creating posts")
     values.id= v4();
     values.timestamp = Date.now();
     values.voteScore = 0;
@@ -79,14 +82,11 @@ export function vote(contentType , id , direction , returnType){
     }
 }
 
-export function edit( /* id , contentType, , values , returnType , */ callback  ){
+export function edit( id ,values,   contentType, returnType ,  callback  ){
     console.log("edit triggered")
-    let id = "8xf0y6ziyjabvozdd253nd" ;
-    let values = {};
-    values.title = 'new title4';
-    values.body = 'new body4' ;
+   
     // const returnType = "EDIT_POST";
-    const request = axios.put(`${ROOT_URL}/posts/${id}`,
+    const request = axios.put(`${ROOT_URL}/${contentType}/${id}`,
     {title: values.title , body: values.body} , 
     
     {headers: {Authorization : "hello"}}
@@ -94,23 +94,13 @@ export function edit( /* id , contentType, , values , returnType , */ callback  
     .then(()=>callback()); 
     
     return{
-        type: "EDIT_POST"//returnType,
+        type: returnType,
         
        // payload:  {...recipe, starredByJoe : newStarredValue }  
     }
 }
 export function changeField(id ,field, text){
      
-    const fieldChanged = id.field
-    return{
-
-        type: CHANGE_FIELD,
-        id ,
-        field,
-        text
-       
-        
-    }
 
 }
 export function deletePost(id, callback){
@@ -124,34 +114,32 @@ export function deletePost(id, callback){
     }
 }
 
+export function createComment(parentId,values ,callback){
+    values.id= v4();
+    values.timestamp = Date.now();
+    //values.voteScore = 0;
+    values.owner = "values.owner;"
+    values.parentId = parentId;
 
+   console.log("Creating comment")
+    const request  = axios.post(`${ROOT_URL}/comments/`,values,
+    {headers: {'Authorization': 'hello'}})
+        .then(()=> callback());
+    return{
+        type: CREATE_COMMENT,
+        payload: request      
+    }  
+}
 
-
-
-
-export function createComment(starredOnly, query, cookingTime, callback){
-    const request = axios({
-        method: 'post',
-        url: '/filter/',
-        data: {
-          starredOnly,
-          query,
-          cookingTime,
-          headers: {
-            ...headers,
-            'Content-Type': 'application/json'
-          }
-        }
-    }).then(function(response) {
-        return response.data;
-        })
-    .then((parsedData)=> {
-        // data here
-        
-        callback(parsedData)   
-
-    }) 
+export function deleteComment(id){
+    const request = axios.delete(
+        `${ROOT_URL}/comments/${id}`,
+        {headers: {'authorization': 'hello'}})
     
+    return{
+        type : DELETE_COMMENT,
+        payload: id
+    }
 }
 
 export function returnFilterChange(parsedData){
@@ -161,4 +149,24 @@ export function returnFilterChange(parsedData){
           payload : parsedData
       }
   
+  }
+
+  export function populateForm(post){
+      return{
+
+         type: POPULATE_FORM,
+         payload: post
+      }
+  }
+  export function setFormState(post ){
+
+    return {
+
+
+        type: SET_FORM_STATE,
+        payload : post
+
+    }
+
+
   }

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import '../App.css';
 import {connect} from 'react-redux' ;
-import {loadPost  , loadPostComments , deletePost ,vote } from '../actions';
+import {loadPost  , loadPostComments , deletePost , deleteComment, vote  } from '../actions';
 import {Link} from 'react-router-dom'
 
 
@@ -37,14 +37,15 @@ renderDate(date){
   }
 
   renderComments(){
-   console.log("comments in render comments", this.props.comments)
-
+  
     if(this.props.comments === undefined){
       return <div>...waiting for comments</div>
     }
-    else{
+   // console.log("the comments are:",this.props.comments)
      
-        return this.props.comments.map(comment =>{
+    else{
+        return  _.map(this.props.comments, comment =>{
+       // return this.props.comments.map(comment =>{
             return (
               <li className="posts-list__item posts-list__item--comments">
             
@@ -56,7 +57,7 @@ renderDate(date){
             <div className="post-list__item__secondary">
               <div class="right">
                 <button className="all-margin-1 button--small">Edit comment</button>
-                <button className="all-margin-1 button--small">Delete Comment</button>
+                <button onClick={deleteComment(comment.id)} className="all-margin-1 button--small">Delete Comment</button>
               </div>
               <div className="post-list__item__votes">
                 <h2 className="no-margin"> {comment.voteScore} votes + - </h2>
@@ -76,7 +77,7 @@ renderDate(date){
 
     }
 
-      
+     
   }
   
   render() {
@@ -111,7 +112,7 @@ renderDate(date){
                 <p>{post.body}</p>
               </div>
             
-                <button className="right">Create new comment +</button>
+                <button className="right"><Link to={`/create-comment/${post.id}`}>Create new comment +</Link></button>
                 <div className="right"> 
                 Filter comments by &nbsp;
                   <select defaultValue="Order by"  onChange="" >
@@ -123,7 +124,7 @@ renderDate(date){
                 </div>
                 <h2> Comments </h2>
                 <ul className="comments-list">
-                  {this.renderComments()}
+                  {this.renderComments() }
                  
                 </ul>
               </div>
@@ -137,5 +138,5 @@ function mapStateToProps(state ,ownProps){
     return { comments : state.posts.comments , post:  state.posts[params]}
 
 }
-export default connect(mapStateToProps, {loadPost, loadPostComments, deletePost, vote})(Post)
+export default connect(mapStateToProps, {loadPost, loadPostComments, deletePost, deleteComment, vote})(Post)
 
