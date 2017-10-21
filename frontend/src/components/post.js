@@ -7,10 +7,12 @@ import {Link} from 'react-router-dom'
 
 
 class Post extends Component {
-  componentDidMount(){
+  componentWillMount(){
     const {id} = this.props.match.params
-    this.props.loadPostComments(id);
-    this.props.loadPost(id);
+   
+      this.props.loadPost(id);
+      this.props.loadPostComments(id);
+    
    
 }
 voteChange(contentType , id , direction, returnType){
@@ -135,7 +137,7 @@ renderDate(date){
 function mapStateToProps(state ,ownProps){
     // return { comments : state.comments ,post : state[ownProps.match.params.id]}
     const params = ownProps.match.params.id;
-    return { comments : state.posts.comments , post:  state.posts[params]}
+    return { comments : state.comments , post:  state.posts[params]}
 
 }
 export default connect(mapStateToProps, {loadPost, loadPostComments, deletePost, deleteComment, vote})(Post)
