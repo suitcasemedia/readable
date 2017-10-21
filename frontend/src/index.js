@@ -14,16 +14,19 @@ import CreateComment from './components/create-comment'
 import CreatePost from './components/create-post';
 import Edit from './components/edit'
 //const store = createStore(reducer)
-
+import {loadState , saveState} from './local-storage' ;
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ 
 
 const createStoreWithMiddleware = composeEnhancers(applyMiddleware(promise))(createStore);
-
-
+const store = createStoreWithMiddleware(reducer, loadState)
+store.subscribe(() => {
+  //this is just a function that saves state to localStorage
+  saveState(store.getState());
+});
 
 ReactDOM.render(
-    <Provider store={createStoreWithMiddleware(reducer)}>
+    <Provider store={store}>
       <BrowserRouter>
       <div>
         <Switch>

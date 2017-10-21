@@ -14,9 +14,9 @@ export default function (state= initialCommentsState , action){
             return _.omit(state.comments, action.payload);
         case LOAD_POST_COMMENTS:
             if(action.payload.data){
-               return  _.mapKeys(action.payload.data,'id')
-               
-              //  return {...state , comments}
+                
+                return  _.mapKeys(action.payload.data,'id')
+              
             }
         case CREATE_COMMENT:    
             return{...state}

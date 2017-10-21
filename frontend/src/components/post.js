@@ -4,6 +4,8 @@ import '../App.css';
 import {connect} from 'react-redux' ;
 import {loadPost  , loadPostComments , deletePost , deleteComment, vote  } from '../actions';
 import {Link} from 'react-router-dom'
+import {loadState , saveState} from '../local-storage' ;
+
 
 
 class Post extends Component {
@@ -11,8 +13,12 @@ class Post extends Component {
     const {id} = this.props.match.params
    
       this.props.loadPost(id);
-      this.props.loadPostComments(id);
-    
+     saveState(
+      this.props.loadPostComments(id)
+       
+     ) 
+     loadState();
+      
    
 }
 voteChange(contentType , id , direction, returnType){
