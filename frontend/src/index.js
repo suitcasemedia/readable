@@ -19,7 +19,8 @@ import {loadState , saveState} from './local-storage' ;
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ 
 
 const createStoreWithMiddleware = composeEnhancers(applyMiddleware(promise))(createStore);
-const store = createStoreWithMiddleware(reducer, loadState)
+const savedState = loadState() ;
+const store = createStoreWithMiddleware(reducer, savedState)
 store.subscribe(() => {
   //this is just a function that saves state to localStorage
   saveState(store.getState());
