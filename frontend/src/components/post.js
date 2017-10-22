@@ -16,7 +16,7 @@ class Post extends Component {
     this.props.loadPost(id);
     this.props.loadPostComments(id)
        
-    saveState(this.props.comments)  
+    
      
       
    
